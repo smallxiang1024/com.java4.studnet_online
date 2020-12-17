@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+            <context:component-scan base-package="com.online_stu.Controller" >
+                <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+            </context:component-scan>
+
+    <!--    开启注解支持-->
+    <mvc:annotation-driven>
+        <!-- 消息转换器 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--    配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" ></property>
+        <property name="suffix" value=".jsp" ></property>
+    </bean>
+
+<!--配置文件解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="uploadTempDir" value="/temp"></property>
+    </bean>
+<!--配置拦截器-->
+    <mvc:interceptors>
+       <mvc:interceptor>
+<!-- 严格遵循顺序1  /** 对所有的方法拦截·-->
+           <mvc:mapping path="/**"/>
+<!-- 拦截不需要的方法-->
+            <mvc:exclude-mapping path="/login"/>
+<!--            <mvc:exclude-mapping path="/admin"/>-->
+<!--   指定拦截器-->
+           <bean class="com.online_stu.interceptor.myHandlentercrptor"></bean>
+
+       </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

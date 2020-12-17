@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.online_stu.dao.CourseDao">
+    <!--    查询所有-->
+    <select id="selectByList" resultType="course">
+        select cid,cname,chours,cscore from course_info
+    </select>
+    <!--    查询按照id-->
+<!--    <select id="SelectById" resultType="student">-->
+<!--        select sid,sname,sex,scolleges,sclass,stel from student_info_manage where sid = #{id}-->
+<!--    </select>-->
+<!--    <insert id="InsertStudnet" >-->
+<!--        insert into student_info_manage (sid, sname, sex, scolleges, sclass, stel)values (#{sid},#{sname},#{sex}-->
+<!--                                                                                         ,#{scolleges},#{sclass}, #{stel})-->
+<!--    </insert>-->
+    <update id="updateByCid" >
+        update course_info
+        set cname = #{cname},chours = #{chours},cscore = #{cscore}
+        where  cid = #{cid}
+    </update>
+
+    <delete id="deleteByid" >
+        delete from course_info where cid = #{cid}
+    </delete>
+
+
+    <insert id="addCourse" >
+        insert into course_info(cid, cname, chours, cscore) VALUES
+        (#{cid},#{cname}, #{chours}, #{cscore})
+    </insert>
+
+</mapper>

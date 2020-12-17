@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.online_stu.dao.UserDao">
+    <!--    查询按照密码和用户名-->
+   <select id="selectByNamePass" resultType="user" >
+        select * from user where name = #{name} and password = #{pawd}
+   </select>
+    <!--    查询按照id-->
+    <update id="updateByid">
+        update user set name = #{name},password=#{password},email=#{email}
+        where id = #{id}
+    </update>
+
+    <insert id="addUser">
+        insert into user (id, name, password, email) VALUES (#{id},#{name},#{password},#{email})
+    </insert>
+
+    <delete id="deleteByid">
+        delete from user where id = #{id}
+    </delete>
+
+
+
+
+
+
+</mapper>
