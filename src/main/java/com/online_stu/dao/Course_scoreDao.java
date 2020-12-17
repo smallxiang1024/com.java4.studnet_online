@@ -19,7 +19,7 @@ import com.online_stu.bean.score;
 import java.util.List;
 
 /**
- @author ljh
+ @author ljh and smallxiang
  @create 2020-12-02-21:49
  **/
 public interface Course_scoreDao {
